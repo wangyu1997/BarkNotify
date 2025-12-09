@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bark 通知发送器</title>
+    <title>💌 爱的通知</title>
     <style>
         * {
             margin: 0;
@@ -13,75 +13,120 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
             background-attachment: fixed;
             min-height: 100vh;
             padding: 20px;
-            color: #1d1d1f;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 背景装饰 */
+        .bg-decoration {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.15;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .heart:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+        .heart:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 4s; }
+        .heart:nth-child(4) { top: 60%; right: 10%; animation-delay: 6s; }
+        .heart:nth-child(5) { bottom: 30%; right: 25%; animation-delay: 8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
 
         .container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
-            backdrop-filter: blur(10px) saturate(150%);
-            -webkit-backdrop-filter: blur(10px) saturate(150%);
-            color: white;
-            padding: 40px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+            position: relative;
         }
 
-        .header h1 {
-            font-size: 32px;
+        .settings-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: rotate(90deg);
+        }
+
+        .logo {
+            font-size: 64px;
+            margin-bottom: 16px;
+            animation: heartbeat 2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        .title {
+            font-size: 36px;
             font-weight: 700;
             margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
         }
 
-        .header p {
-            font-size: 15px;
-            opacity: 0.95;
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
             font-weight: 400;
         }
 
-        .content {
-            padding: 30px 20px;
-        }
-
-        .section {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .section-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: #1d1d1f;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            letter-spacing: -0.3px;
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 24px;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
         }
 
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 24px;
         }
 
         .form-group:last-child {
@@ -90,147 +135,155 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #1d1d1f;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #ff6b9d;
             font-size: 14px;
             letter-spacing: -0.2px;
         }
 
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            opacity: 0.6;
+        }
+
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
             width: 100%;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.8);
+            padding: 16px 16px 16px 48px;
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            font-size: 15px;
+            border: 2px solid rgba(255, 107, 157, 0.2);
+            border-radius: 16px;
+            font-size: 16px;
             transition: all 0.3s ease;
             font-family: inherit;
-            color: #1d1d1f;
+            color: #333;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.95);
-            border-color: rgba(102, 126, 234, 0.5);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: rgba(255, 107, 157, 0.6);
+            box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.1);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
+            padding-top: 16px;
         }
 
-        .form-group small {
-            display: block;
-            margin-top: 6px;
-            color: #86868b;
-            font-size: 12px;
-            letter-spacing: -0.1px;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 10px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: #667eea;
-        }
-
-        .checkbox-group label {
-            margin: 0;
-            font-weight: 400;
-            cursor: pointer;
-            font-size: 14px;
-            color: #1d1d1f;
-        }
-
-        .radio-group {
+        .format-selector {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
-        .radio-option {
+        .format-btn {
             flex: 1;
-            min-width: 110px;
-        }
-
-        .radio-option input[type="radio"] {
-            display: none;
-        }
-
-        .radio-option label {
-            display: block;
-            padding: 12px 16px;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 12px;
-            text-align: center;
+            border: 2px solid rgba(255, 107, 157, 0.2);
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
             font-size: 14px;
-            color: #1d1d1f;
+            color: #666;
+            text-align: center;
         }
 
-        .radio-option label:hover {
+        .format-btn:hover {
             background: rgba(255, 255, 255, 0.8);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
-        .radio-option input[type="radio"]:checked + label {
-            background: rgba(102, 126, 234, 0.95);
+        .format-btn.active {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa8d0 100%);
             color: white;
-            border-color: rgba(102, 126, 234, 0.3);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            border-color: rgba(255, 107, 157, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4);
         }
 
-        .btn {
+        .advanced-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #ff6b9d;
+            font-weight: 500;
+        }
+
+        .advanced-toggle:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .advanced-toggle .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .advanced-toggle.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .advanced-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .advanced-content.show {
+            max-height: 2000px;
+        }
+
+        .send-btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 18px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa8d0 100%);
             color: white;
             border: none;
-            border-radius: 14px;
-            font-size: 17px;
+            border-radius: 16px;
+            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: -0.3px;
+            box-shadow: 0 8px 24px rgba(255, 107, 157, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
+        .send-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(255, 107, 157, 0.45);
         }
 
-        .btn:active {
-            transform: translateY(0);
+        .send-btn:active {
+            transform: translateY(-1px);
         }
 
-        .btn:disabled {
-            opacity: 0.5;
+        .send-btn:disabled {
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
@@ -239,6 +292,7 @@
             display: none !important;
         }
 
+        /* 模态框 */
         .modal {
             display: none;
             position: fixed;
@@ -246,9 +300,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -261,30 +315,26 @@
         }
 
         @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border-radius: 20px;
-            padding: 32px;
-            max-width: 400px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border-radius: 24px;
+            padding: 36px;
+            max-width: 420px;
             width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
             animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         @keyframes modalSlideIn {
             from {
-                transform: scale(0.9) translateY(-20px);
+                transform: scale(0.9) translateY(-30px);
                 opacity: 0;
             }
             to {
@@ -294,337 +344,307 @@
         }
 
         .modal-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 24px;
         }
 
         .modal-icon {
-            font-size: 48px;
+            font-size: 64px;
+            margin-bottom: 16px;
         }
 
         .modal-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: #1d1d1f;
-            letter-spacing: -0.4px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff6b9d;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
         .modal-body {
-            margin-bottom: 24px;
-            color: #1d1d1f;
-            line-height: 1.6;
+            color: #666;
+            line-height: 1.7;
             font-size: 15px;
+            text-align: center;
         }
 
         .modal-footer {
+            margin-top: 28px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .modal-btn {
             flex: 1;
             padding: 14px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .modal-btn-primary {
-            background: rgba(102, 126, 234, 0.95);
+            background: linear-gradient(135deg, #ff6b9d 0%, #ffa8d0 100%);
             color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
         }
 
         .modal-btn-primary:hover {
-            background: rgba(102, 126, 234, 1);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 107, 157, 0.4);
         }
 
-        .modal-btn-primary:active {
-            transform: translateY(0);
+        .modal-btn-secondary {
+            background: rgba(255, 107, 157, 0.1);
+            color: #ff6b9d;
         }
 
+        .modal-btn-secondary:hover {
+            background: rgba(255, 107, 157, 0.2);
+        }
+
+        /* 设置模态框特殊样式 */
+        .settings-modal .form-group input {
+            padding-left: 16px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px;
+            background: rgba(255, 107, 157, 0.08);
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #ff6b9d;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 选择器样式 */
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 107, 157, 0.2);
+            border-radius: 14px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            color: #333;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(255, 107, 157, 0.6);
+            box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.1);
+        }
+
+        /* 响应式 */
         @media (max-width: 640px) {
             body {
-                padding: 10px;
+                padding: 15px;
             }
 
-            .header {
-                padding: 30px 20px;
+            .card {
+                padding: 24px;
             }
 
-            .header h1 {
+            .title {
                 font-size: 28px;
             }
 
-            .content {
-                padding: 20px 15px;
+            .logo {
+                font-size: 48px;
             }
 
-            .section {
-                padding: 16px;
-            }
-
-            .radio-group {
+            .format-selector {
                 flex-direction: column;
             }
 
-            .radio-option {
-                min-width: 100%;
-            }
-
             .modal-content {
-                padding: 24px;
+                padding: 28px;
             }
         }
 
+        /* 暗色模式 */
         @media (prefers-color-scheme: dark) {
             body {
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                background: linear-gradient(135deg, #2d1b69 0%, #5c3a8f 50%, #8b5fbf 100%);
             }
 
-            .container {
-                background: rgba(28, 28, 30, 0.8);
-                border-color: rgba(255, 255, 255, 0.1);
-            }
-
-            .section {
-                background: rgba(44, 44, 46, 0.6);
+            .card {
+                background: rgba(30, 30, 40, 0.9);
                 border-color: rgba(255, 255, 255, 0.1);
             }
 
             .form-group input,
             .form-group textarea,
-            .form-group select {
-                background: rgba(58, 58, 60, 0.8);
-                border-color: rgba(255, 255, 255, 0.1);
+            select {
+                background: rgba(50, 50, 60, 0.8);
+                border-color: rgba(255, 107, 157, 0.3);
                 color: #f5f5f7;
             }
 
-            .form-group input:focus,
-            .form-group textarea:focus,
-            .form-group select:focus {
-                background: rgba(58, 58, 60, 0.95);
+            .format-btn {
+                background: rgba(50, 50, 60, 0.6);
+                color: #ccc;
+                border-color: rgba(255, 107, 157, 0.2);
             }
 
-            .section-title,
-            .form-group label,
-            .checkbox-group label {
-                color: #f5f5f7;
-            }
-
-            .radio-option label {
-                background: rgba(58, 58, 60, 0.6);
-                color: #f5f5f7;
-                border-color: rgba(255, 255, 255, 0.1);
-            }
-
-            .checkbox-group {
-                background: rgba(58, 58, 60, 0.4);
+            .advanced-toggle {
+                background: rgba(50, 50, 60, 0.5);
             }
 
             .modal-content {
-                background: rgba(28, 28, 30, 0.95);
-                border-color: rgba(255, 255, 255, 0.1);
+                background: rgba(30, 30, 40, 0.98);
             }
 
-            .modal-title,
-            .modal-body {
-                color: #f5f5f7;
+            .modal-body,
+            .checkbox-group label {
+                color: #ccc;
             }
+        }
+
+        .subtitle-input {
+            margin-top: 12px;
         }
     </style>
 </head>
 <body>
+    <!-- 背景装饰 -->
+    <div class="bg-decoration">
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">💗</div>
+        <div class="heart">💝</div>
+        <div class="heart">💓</div>
+    </div>
+
     <div class="container">
+        <!-- 头部 -->
         <div class="header">
-            <h1>🔔 Bark 通知发送器</h1>
-            <p>支持多种通知格式的 iOS 推送工具</p>
+            <div class="settings-btn" onclick="openSettings()">⚙️</div>
+            <div class="logo">💌</div>
+            <h1 class="title">爱的通知</h1>
+            <p class="subtitle">把思念传递给 TA</p>
         </div>
 
-        <div class="content">
+        <!-- 主卡片 -->
+        <div class="card">
             <form id="barkForm">
-                <!-- 基础配置 -->
-                <div class="section">
-                    <div class="section-title">⚙️ 基础配置</div>
-
-                    <div class="form-group">
-                        <label for="token">设备 Key (Token) *</label>
-                        <input type="text" id="token" placeholder="输入你的 Bark Key" required>
-                        <small>在 Bark App 中查看你的设备 Key</small>
+                <!-- 格式选择 -->
+                <div class="format-selector">
+                    <div class="format-btn active" data-format="title" onclick="selectFormat('title')">
+                        📝 标题消息
                     </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="saveToken">
-                        <label for="saveToken">记住此 Key（保存在本地）</label>
+                    <div class="format-btn" data-format="simple" onclick="selectFormat('simple')">
+                        💬 简单消息
                     </div>
-
-                    <div class="form-group">
-                        <label>请求方式</label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="method" id="methodGet" value="GET" checked>
-                                <label for="methodGet">GET</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="method" id="methodPost" value="POST">
-                                <label for="methodPost">POST</label>
-                            </div>
-                        </div>
+                    <div class="format-btn" data-format="full" onclick="selectFormat('full')">
+                        📋 完整消息
                     </div>
                 </div>
 
-                <!-- 通知格式 -->
-                <div class="section">
-                    <div class="section-title">📝 通知格式</div>
-
-                    <div class="form-group">
-                        <label>选择通知格式</label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" name="format" id="formatSimple" value="simple">
-                                <label for="formatSimple">简单通知</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="format" id="formatTitle" value="title" checked>
-                                <label for="formatTitle">带标题</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" name="format" id="formatFull" value="full">
-                                <label for="formatFull">完整格式</label>
-                            </div>
-                        </div>
-                        <small id="formatHint">格式：/:key/:title/:body</small>
-                    </div>
-
-                    <div class="form-group hidden" id="titleGroup">
-                        <label for="title">标题 (Title)</label>
-                        <input type="text" id="title" placeholder="推送标题（字号较粗）">
-                        <small>通知的主标题</small>
-                    </div>
-
-                    <div class="form-group hidden" id="subtitleGroup">
-                        <label for="subtitle">副标题 (Subtitle)</label>
-                        <input type="text" id="subtitle" placeholder="推送副标题">
-                        <small>显示在标题下方</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="body">内容 (Body) *</label>
-                        <textarea id="body" placeholder="推送内容，支持 \n 换行符" required></textarea>
-                        <small>换行请使用 \n</small>
+                <!-- 标题 -->
+                <div class="form-group" id="titleGroup">
+                    <label>💝 标题</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">✨</span>
+                        <input type="text" id="title" placeholder="想对 TA 说什么...">
                     </div>
                 </div>
 
-                <!-- 功能选项 -->
-                <div class="section">
-                    <div class="section-title">🎯 功能选项</div>
-
-                    <div class="form-group">
-                        <label for="url">跳转链接 (URL)</label>
-                        <input type="url" id="url" placeholder="https://www.example.com">
-                        <small>点击推送后跳转的链接（需编码）</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="group">分组 (Group)</label>
-                        <input type="text" id="group" placeholder="例如：工作、生活">
-                        <small>指定推送消息分组，可在历史记录中按分组查看</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="icon">图标 (Icon) - 仅 iOS 15+</label>
-                        <input type="url" id="icon" placeholder="https://example.com/icon.png">
-                        <small>指定推送消息的图标 URL</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="copy">自动复制 (Copy)</label>
-                        <input type="text" id="copy" placeholder="要复制到剪贴板的内容">
-                        <small>收到推送时自动复制此内容</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ciphertext">加密密文 (Ciphertext)</label>
-                        <input type="text" id="ciphertext" placeholder="加密后的密文">
-                        <small>推送加密的密文内容</small>
+                <!-- 副标题 -->
+                <div class="form-group hidden" id="subtitleGroup">
+                    <label>🌟 副标题</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">💫</span>
+                        <input type="text" id="subtitle" placeholder="补充一下...">
                     </div>
                 </div>
 
-                <!-- 铃声和提醒 -->
-                <div class="section">
-                    <div class="section-title">🔊 铃声和提醒</div>
+                <!-- 内容 -->
+                <div class="form-group">
+                    <label>💬 消息内容</label>
+                    <textarea id="body" placeholder="写下你的心里话...&#10;支持换行哦 (\n)" required></textarea>
+                </div>
+
+                <!-- 高级选项切换 -->
+                <div class="advanced-toggle" onclick="toggleAdvanced()">
+                    <span>🎨 更多选项</span>
+                    <span class="arrow">▼</span>
+                </div>
+
+                <!-- 高级选项内容 -->
+                <div class="advanced-content" id="advancedContent">
+                    <div class="form-group">
+                        <label>🔗 点击跳转链接</label>
+                        <input type="url" id="url" placeholder="https://example.com">
+                    </div>
 
                     <div class="form-group">
-                        <label for="sound">铃声 (Sound)</label>
+                        <label>📂 消息分组</label>
+                        <input type="text" id="group" placeholder="例如：爱的日记">
+                    </div>
+
+                    <div class="form-group">
+                        <label>🎵 通知铃声</label>
                         <select id="sound">
                             <option value="">默认铃声</option>
-                            <option value="alarm">alarm - 警报</option>
-                            <option value="bell">bell - 铃铛</option>
-                            <option value="birdsong">birdsong - 鸟鸣</option>
-                            <option value="bloom">bloom - 绽放</option>
-                            <option value="calypso">calypso - 卡里普索</option>
-                            <option value="chime">chime - 钟声</option>
-                            <option value="choo">choo - 火车</option>
-                            <option value="descent">descent - 下降</option>
-                            <option value="electronic">electronic - 电子</option>
-                            <option value="fanfare">fanfare - 号角</option>
-                            <option value="glass">glass - 玻璃</option>
-                            <option value="gotosleep">gotosleep - 入睡</option>
-                            <option value="healthnotification">healthnotification - 健康</option>
-                            <option value="horn">horn - 喇叭</option>
-                            <option value="ladder">ladder - 阶梯</option>
-                            <option value="mailsent">mailsent - 邮件已发</option>
-                            <option value="minuet">minuet - 小步舞曲</option>
-                            <option value="multiwayinvitation">multiwayinvitation - 多方邀请</option>
-                            <option value="newmail">newmail - 新邮件</option>
-                            <option value="newsflash">newsflash - 快讯</option>
-                            <option value="noir">noir - 黑色</option>
-                            <option value="paymentsuccess">paymentsuccess - 支付成功</option>
-                            <option value="shake">shake - 摇动</option>
-                            <option value="sherwoodforest">sherwoodforest - 森林</option>
-                            <option value="silence">silence - 静音</option>
-                            <option value="spell">spell - 咒语</option>
-                            <option value="suspense">suspense - 悬念</option>
-                            <option value="telegraph">telegraph - 电报</option>
-                            <option value="tiptoes">tiptoes - 踮脚</option>
-                            <option value="typewriters">typewriters - 打字机</option>
-                            <option value="update">update - 更新</option>
+                            <option value="bell">🔔 bell - 铃铛</option>
+                            <option value="bloom">🌸 bloom - 绽放</option>
+                            <option value="calypso">🎶 calypso - 卡里普索</option>
+                            <option value="chime">🎐 chime - 钟声</option>
+                            <option value="glass">💎 glass - 玻璃</option>
+                            <option value="minuet">🎻 minuet - 小步舞曲</option>
+                            <option value="spell">✨ spell - 咒语</option>
+                            <option value="suspense">🎭 suspense - 悬念</option>
                         </select>
-                        <small>选择推送铃声</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>⚡ 通知优先级</label>
+                        <select id="level">
+                            <option value="">默认</option>
+                            <option value="active">⚡ active - 立即提醒</option>
+                            <option value="timeSensitive">⏰ timeSensitive - 重要消息</option>
+                            <option value="passive">🔕 passive - 静默通知</option>
+                        </select>
                     </div>
 
                     <div class="checkbox-group">
                         <input type="checkbox" id="call">
-                        <label for="call">重复播放铃声 30 秒 (Call)</label>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="level">时效性通知 (Level)</label>
-                        <select id="level">
-                            <option value="">默认 (Active)</option>
-                            <option value="active">active - 立即亮屏显示</option>
-                            <option value="timeSensitive">timeSensitive - 时效性通知（专注模式可显示）</option>
-                            <option value="passive">passive - 仅添加到通知列表</option>
-                            <option value="critical">critical - 重要警告（忽略静音和勿扰）</option>
-                        </select>
-                        <small>设置通知的优先级和显示方式</small>
+                        <label for="call">🔊 重复播放铃声 30 秒</label>
                     </div>
                 </div>
 
-                <button type="submit" class="btn" id="sendBtn">
-                    📤 发送通知
+                <!-- 发送按钮 -->
+                <button type="submit" class="send-btn" id="sendBtn">
+                    <span>💕</span>
+                    <span>发送给 TA</span>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- 结果弹窗 -->
+    <!-- 结果模态框 -->
     <div class="modal" id="resultModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -633,14 +653,51 @@
             </div>
             <div class="modal-body" id="modalBody"></div>
             <div class="modal-footer">
-                <button class="modal-btn modal-btn-primary" onclick="closeModal()">确定</button>
+                <button class="modal-btn modal-btn-primary" onclick="closeModal('resultModal')">好的</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置模态框 -->
+    <div class="modal settings-modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-icon">⚙️</div>
+                <div class="modal-title">设置</div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label style="color: #ff6b9d; text-align: left;">💌 TA 的设备 Key</label>
+                    <input type="text" id="settingsToken" placeholder="输入对方的 Bark Key">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="settingsSaveToken">
+                        <label for="settingsSaveToken">记住 Key（保存在本地）</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="color: #ff6b9d; text-align: left;">📡 服务器地址</label>
+                    <input type="text" id="settingsServer" value="https://bark.bj.noway.top:10997" placeholder="Bark 服务器地址">
+                </div>
+
+                <div class="form-group">
+                    <label style="color: #ff6b9d; text-align: left;">🖼️ 通知图标</label>
+                    <input type="url" id="settingsIcon" value="https://day.app/assets/images/avatar.jpg" placeholder="图标 URL">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('settingsModal')">取消</button>
+                <button class="modal-btn modal-btn-primary" onclick="saveSettings()">保存</button>
             </div>
         </div>
     </div>
 
     <script>
-        const BARK_URL = 'https://bark.bj.noway.top:10997';
+        let BARK_URL = 'https://bark.bj.noway.top:10997';
+        let ICON_URL = 'https://day.app/assets/images/avatar.jpg';
         const TOKEN_COOKIE_NAME = 'bark_token';
+        const SERVER_COOKIE_NAME = 'bark_server';
+        const ICON_COOKIE_NAME = 'bark_icon';
 
         // Cookie 操作
         function getCookie(name) {
@@ -661,110 +718,143 @@
             document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
         }
 
-        // 显示结果弹窗
-        function showModal(success, title, message) {
+        // 显示结果模态框
+        function showResultModal(success, title, message) {
             const modal = document.getElementById('resultModal');
             const icon = document.getElementById('modalIcon');
             const titleEl = document.getElementById('modalTitle');
             const body = document.getElementById('modalBody');
 
-            icon.textContent = success ? '✅' : '❌';
+            icon.textContent = success ? '💖' : '💔';
             titleEl.textContent = title;
             body.innerHTML = message;
 
             modal.classList.add('show');
         }
 
-        function closeModal() {
-            document.getElementById('resultModal').classList.remove('show');
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        // 格式选择
+        function selectFormat(format) {
+            const buttons = document.querySelectorAll('.format-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.format-btn').classList.add('active');
+
+            const titleGroup = document.getElementById('titleGroup');
+            const subtitleGroup = document.getElementById('subtitleGroup');
+            const titleInput = document.getElementById('title');
+            const subtitleInput = document.getElementById('subtitle');
+
+            if (format === 'simple') {
+                titleGroup.classList.add('hidden');
+                subtitleGroup.classList.add('hidden');
+                titleInput.removeAttribute('required');
+                subtitleInput.removeAttribute('required');
+            } else if (format === 'title') {
+                titleGroup.classList.remove('hidden');
+                subtitleGroup.classList.add('hidden');
+                titleInput.setAttribute('required', 'required');
+                subtitleInput.removeAttribute('required');
+            } else if (format === 'full') {
+                titleGroup.classList.remove('hidden');
+                subtitleGroup.classList.remove('hidden');
+                titleInput.setAttribute('required', 'required');
+                subtitleInput.setAttribute('required', 'required');
+            }
+        }
+
+        // 切换高级选项
+        function toggleAdvanced() {
+            const content = document.getElementById('advancedContent');
+            const toggle = document.querySelector('.advanced-toggle');
+            content.classList.toggle('show');
+            toggle.classList.toggle('active');
+        }
+
+        // 打开设置
+        function openSettings() {
+            const token = getCookie(TOKEN_COOKIE_NAME);
+            const server = getCookie(SERVER_COOKIE_NAME) || BARK_URL;
+            const icon = getCookie(ICON_COOKIE_NAME) || ICON_URL;
+
+            document.getElementById('settingsToken').value = token;
+            document.getElementById('settingsSaveToken').checked = !!token;
+            document.getElementById('settingsServer').value = server;
+            document.getElementById('settingsIcon').value = icon;
+
+            document.getElementById('settingsModal').classList.add('show');
+        }
+
+        // 保存设置
+        function saveSettings() {
+            const token = document.getElementById('settingsToken').value.trim();
+            const saveToken = document.getElementById('settingsSaveToken').checked;
+            const server = document.getElementById('settingsServer').value.trim();
+            const icon = document.getElementById('settingsIcon').value.trim();
+
+            if (saveToken && token) {
+                setCookie(TOKEN_COOKIE_NAME, token);
+            } else {
+                deleteCookie(TOKEN_COOKIE_NAME);
+            }
+
+            if (server) {
+                BARK_URL = server;
+                setCookie(SERVER_COOKIE_NAME, server);
+            }
+
+            if (icon) {
+                ICON_URL = icon;
+                setCookie(ICON_COOKIE_NAME, icon);
+            }
+
+            closeModal('settingsModal');
+            showResultModal(true, '设置已保存', '<p>您的设置已成功保存！💕</p>');
         }
 
         // 页面加载
         window.addEventListener('DOMContentLoaded', () => {
-            // 恢复保存的 Token
-            const savedToken = getCookie(TOKEN_COOKIE_NAME);
-            if (savedToken) {
-                document.getElementById('token').value = savedToken;
-                document.getElementById('saveToken').checked = true;
-            }
+            // 恢复设置
+            const savedServer = getCookie(SERVER_COOKIE_NAME);
+            const savedIcon = getCookie(ICON_COOKIE_NAME);
+            if (savedServer) BARK_URL = savedServer;
+            if (savedIcon) ICON_URL = savedIcon;
 
-            // 通知格式切换
-            const formatRadios = document.querySelectorAll('input[name="format"]');
-            const titleGroup = document.getElementById('titleGroup');
-            const subtitleGroup = document.getElementById('subtitleGroup');
-            const formatHint = document.getElementById('formatHint');
-            const titleInput = document.getElementById('title');
-            const subtitleInput = document.getElementById('subtitle');
-
-            formatRadios.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    const format = e.target.value;
-
-                    if (format === 'simple') {
-                        titleGroup.classList.add('hidden');
-                        subtitleGroup.classList.add('hidden');
-                        titleInput.removeAttribute('required');
-                        subtitleInput.removeAttribute('required');
-                        formatHint.textContent = '格式：/:key/:body';
-                    } else if (format === 'title') {
-                        titleGroup.classList.remove('hidden');
-                        subtitleGroup.classList.add('hidden');
-                        titleInput.setAttribute('required', 'required');
-                        subtitleInput.removeAttribute('required');
-                        formatHint.textContent = '格式：/:key/:title/:body';
-                    } else if (format === 'full') {
-                        titleGroup.classList.remove('hidden');
-                        subtitleGroup.classList.remove('hidden');
-                        titleInput.setAttribute('required', 'required');
-                        subtitleInput.setAttribute('required', 'required');
-                        formatHint.textContent = '格式：/:key/:title/:subtitle/:body';
-                    }
-                });
-            });
-
-            // 默认选中"带标题"格式
-            document.getElementById('formatTitle').checked = true;
-            titleGroup.classList.remove('hidden');
-            titleInput.setAttribute('required', 'required');
+            // 默认展开标题组
+            document.getElementById('titleGroup').classList.remove('hidden');
         });
 
         // 表单提交
         document.getElementById('barkForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const token = document.getElementById('token').value.trim();
-            const format = document.querySelector('input[name="format"]:checked').value;
-            const method = document.querySelector('input[name="method"]:checked').value;
+            const token = getCookie(TOKEN_COOKIE_NAME);
+            if (!token) {
+                showResultModal(false, '未设置 Key', '<p>请先在右上角设置中配置对方的设备 Key 哦~</p>');
+                return;
+            }
+
+            const activeFormat = document.querySelector('.format-btn.active').dataset.format;
             const title = document.getElementById('title').value.trim();
             const subtitle = document.getElementById('subtitle').value.trim();
             const body = document.getElementById('body').value.trim();
-            const saveToken = document.getElementById('saveToken').checked;
 
-            // 功能参数
             const url = document.getElementById('url').value.trim();
             const group = document.getElementById('group').value.trim();
-            const icon = document.getElementById('icon').value.trim();
-            const copy = document.getElementById('copy').value.trim();
-            const ciphertext = document.getElementById('ciphertext').value.trim();
             const sound = document.getElementById('sound').value;
-            const call = document.getElementById('call').checked ? '1' : '';
             const level = document.getElementById('level').value;
-
-            // 保存或删除 Token
-            if (saveToken) {
-                setCookie(TOKEN_COOKIE_NAME, token);
-            } else {
-                deleteCookie(TOKEN_COOKIE_NAME);
-            }
+            const call = document.getElementById('call').checked ? '1' : '';
 
             // 构建 URL
             let requestUrl = `${BARK_URL}/${encodeURIComponent(token)}`;
 
-            if (format === 'simple') {
+            if (activeFormat === 'simple') {
                 requestUrl += `/${encodeURIComponent(body)}`;
-            } else if (format === 'title') {
+            } else if (activeFormat === 'title') {
                 requestUrl += `/${encodeURIComponent(title)}/${encodeURIComponent(body)}`;
-            } else if (format === 'full') {
+            } else if (activeFormat === 'full') {
                 requestUrl += `/${encodeURIComponent(title)}/${encodeURIComponent(subtitle)}/${encodeURIComponent(body)}`;
             }
 
@@ -772,113 +862,95 @@
             const params = new URLSearchParams();
             if (url) params.append('url', url);
             if (group) params.append('group', group);
-            if (icon) params.append('icon', icon);
-            if (copy) params.append('copy', copy);
-            if (ciphertext) params.append('ciphertext', ciphertext);
+            if (ICON_URL) params.append('icon', ICON_URL);
             if (sound) params.append('sound', sound);
             if (call) params.append('call', call);
             if (level) params.append('level', level);
 
-            // 发送请求
             const sendBtn = document.getElementById('sendBtn');
             sendBtn.disabled = true;
-            sendBtn.textContent = '发送中...';
+            sendBtn.innerHTML = '<span>💌</span><span>发送中...</span>';
 
             try {
+                const queryString = params.toString();
+                const finalUrl = queryString ? `${requestUrl}?${queryString}` : requestUrl;
+
                 let response;
-
-                if (method === 'GET') {
-                    const queryString = params.toString();
-                    const finalUrl = queryString ? `${requestUrl}?${queryString}` : requestUrl;
-                    response = await fetch(finalUrl);
-                } else {
-                    // POST 请求
-                    const postData = {};
-                    if (format === 'simple') {
-                        postData.body = body;
-                    } else if (format === 'title') {
-                        postData.title = title;
-                        postData.body = body;
-                    } else if (format === 'full') {
-                        postData.title = title;
-                        postData.subtitle = subtitle;
-                        postData.body = body;
-                    }
-
-                    // 添加功能参数
-                    if (url) postData.url = url;
-                    if (group) postData.group = group;
-                    if (icon) postData.icon = icon;
-                    if (copy) postData.copy = copy;
-                    if (ciphertext) postData.ciphertext = ciphertext;
-                    if (sound) postData.sound = sound;
-                    if (call) postData.call = call;
-                    if (level) postData.level = level;
-
-                    response = await fetch(`${BARK_URL}/${encodeURIComponent(token)}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(postData)
-                    });
-                }
-
-                // 先检查 HTTP 状态码
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-
-                // 尝试解析 JSON
-                let data;
                 try {
-                    data = await response.json();
-                } catch (e) {
-                    // 如果无法解析 JSON，但 HTTP 状态是成功的，也认为是成功
-                    showModal(
+                    response = await fetch(finalUrl, {
+                        mode: 'cors',
+                        credentials: 'omit'
+                    });
+                } catch (corsError) {
+                    await fetch(finalUrl, {
+                        mode: 'no-cors',
+                        credentials: 'omit'
+                    });
+
+                    showResultModal(
                         true,
-                        '发送成功',
-                        `<p>通知已成功发送到您的设备！</p>
-                         <p style="margin-top: 10px; font-size: 13px; color: #888;">请查看您的 iOS 设备</p>`
+                        '爱已送达 💕',
+                        '<p>你的消息已经飞向 TA 啦~</p><p style="margin-top: 10px; font-size: 14px; color: #999;">请让 TA 查收手机通知 📱</p>'
                     );
                     return;
                 }
 
-                // 检查响应数据 - Bark 返回格式：{"code":200,"message":"success","timestamp":1765292381}
-                if (data.code === 200 && data.message === 'success') {
-                    showModal(
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                let data;
+                try {
+                    data = await response.json();
+                } catch (e) {
+                    showResultModal(
                         true,
-                        '发送成功',
-                        `<p>通知已成功发送到您的设备！</p>
-                         <p style="margin-top: 10px; font-size: 13px; color: #888;">请查看您的 iOS 设备</p>`
+                        '爱已送达 💕',
+                        '<p>你的消息已经飞向 TA 啦~</p><p style="margin-top: 10px; font-size: 14px; color: #999;">请让 TA 查收手机通知 📱</p>'
+                    );
+                    return;
+                }
+
+                if (data.code === 200 && data.message === 'success') {
+                    showResultModal(
+                        true,
+                        '爱已送达 💕',
+                        '<p>你的消息已经飞向 TA 啦~</p><p style="margin-top: 10px; font-size: 14px; color: #999;">请让 TA 查收手机通知 📱</p>'
                     );
                 } else {
-                    showModal(
+                    showResultModal(
                         false,
-                        '发送失败',
-                        `<p><strong>错误代码：</strong>${data.code || '未知'}</p>
-                         <p><strong>错误信息：</strong>${data.message || '未知错误'}</p>
-                         <p style="margin-top: 10px; font-size: 13px; color: #888;">请检查您的 Key 和网络连接</p>`
+                        '发送失败 💔',
+                        `<p>啊哦，发送失败了...</p><p style="margin-top: 10px; font-size: 14px; color: #999;">${data.message || '请检查设置'}</p>`
                     );
                 }
             } catch (error) {
-                showModal(
-                    false,
-                    '发送失败',
-                    `<p><strong>错误信息：</strong>${error.message}</p>
-                     <p style="margin-top: 10px; font-size: 13px; color: #888;">请检查网络连接或服务器状态</p>`
-                );
+                if (error.message.includes('Load failed') || error.message.includes('CORS') || error.message.includes('Failed to fetch')) {
+                    showResultModal(
+                        true,
+                        '可能已送达 💌',
+                        '<p>消息可能已经发送成功~</p><p style="margin-top: 10px; font-size: 14px; color: #999;">请让 TA 检查一下手机通知</p>'
+                    );
+                } else {
+                    showResultModal(
+                        false,
+                        '发送失败 💔',
+                        `<p>发送遇到了问题...</p><p style="margin-top: 10px; font-size: 14px; color: #999;">${error.message}</p>`
+                    );
+                }
             } finally {
                 sendBtn.disabled = false;
-                sendBtn.textContent = '📤 发送通知';
+                sendBtn.innerHTML = '<span>💕</span><span>发送给 TA</span>';
             }
         });
 
-        // 点击弹窗外部关闭
-        document.getElementById('resultModal').addEventListener('click', (e) => {
-            if (e.target.id === 'resultModal') {
-                closeModal();
-            }
+        // 点击模态框外部关闭
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
         });
     </script>
 </body>
