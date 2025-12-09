@@ -81,6 +81,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 20px;
+            z-index: 10;
         }
 
         .settings-btn:hover {
@@ -152,14 +153,15 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 18px;
-            opacity: 0.6;
+            opacity: 0.5;
+            color: #666;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
             padding: 16px 16px 16px 48px;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 107, 157, 0.2);
@@ -167,21 +169,27 @@
             font-size: 16px;
             transition: all 0.3s ease;
             font-family: inherit;
-            color: #333;
+            color: #1d1d1f;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 1);
             border-color: rgba(255, 107, 157, 0.6);
             box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #999;
         }
 
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
             padding-top: 16px;
+            padding-left: 16px;
         }
 
         .format-selector {
@@ -323,9 +331,9 @@
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(40px) saturate(180%);
             -webkit-backdrop-filter: blur(40px) saturate(180%);
-            border-radius: 24px;
-            padding: 36px;
-            max-width: 420px;
+            border-radius: 20px;
+            padding: 28px;
+            max-width: 340px;
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
@@ -345,33 +353,33 @@
 
         .modal-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .modal-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
+            font-size: 48px;
+            margin-bottom: 12px;
         }
 
         .modal-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: #ff6b9d;
             letter-spacing: -0.5px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .modal-body {
             color: #666;
-            line-height: 1.7;
-            font-size: 15px;
+            line-height: 1.6;
+            font-size: 14px;
             text-align: center;
         }
 
         .modal-footer {
-            margin-top: 28px;
+            margin-top: 24px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
         .modal-btn {
@@ -406,8 +414,13 @@
         }
 
         /* 设置模态框特殊样式 */
+        .settings-modal .modal-content {
+            max-width: 400px;
+        }
+
         .settings-modal .form-group input {
-            padding-left: 16px;
+            padding: 14px 16px;
+            color: #1d1d1f;
         }
 
         .checkbox-group {
@@ -439,13 +452,13 @@
         select {
             width: 100%;
             padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.95);
             border: 2px solid rgba(255, 107, 157, 0.2);
             border-radius: 14px;
             font-size: 15px;
             transition: all 0.3s ease;
             font-family: inherit;
-            color: #333;
+            color: #1d1d1f;
             cursor: pointer;
         }
 
@@ -479,7 +492,8 @@
             }
 
             .modal-content {
-                padding: 28px;
+                padding: 24px;
+                max-width: 320px;
             }
         }
 
@@ -497,9 +511,14 @@
             .form-group input,
             .form-group textarea,
             select {
-                background: rgba(50, 50, 60, 0.8);
+                background: rgba(50, 50, 60, 0.9);
                 border-color: rgba(255, 107, 157, 0.3);
                 color: #f5f5f7;
+            }
+
+            .form-group input::placeholder,
+            .form-group textarea::placeholder {
+                color: #999;
             }
 
             .format-btn {
