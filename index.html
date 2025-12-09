@@ -161,7 +161,7 @@
         .form-group textarea {
             width: 100%;
             padding: 16px 16px 16px 48px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 250, 245, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 107, 157, 0.2);
@@ -169,20 +169,39 @@
             font-size: 16px;
             transition: all 0.3s ease;
             font-family: inherit;
-            color: #1d1d1f;
+            color: #1d1d1f !important;
+            -webkit-text-fill-color: #1d1d1f !important;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            background: rgba(255, 255, 255, 1);
+            background: rgba(255, 250, 245, 1) !important;
             border-color: rgba(255, 107, 157, 0.6);
             box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.1);
+            color: #1d1d1f !important;
+            -webkit-text-fill-color: #1d1d1f !important;
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: #999;
+            color: #999 !important;
+            opacity: 1;
+        }
+
+        .form-group input::-webkit-input-placeholder,
+        .form-group textarea::-webkit-input-placeholder {
+            color: #999 !important;
+            opacity: 1;
+        }
+
+        .form-group input::-moz-placeholder,
+        .form-group textarea::-moz-placeholder {
+            color: #999 !important;
+            opacity: 1;
         }
 
         .form-group textarea {
@@ -260,6 +279,10 @@
 
         .advanced-content.show {
             max-height: 2000px;
+        }
+
+        .advanced-content input {
+            padding: 14px 16px !important;
         }
 
         .send-btn {
@@ -420,7 +443,15 @@
 
         .settings-modal .form-group input {
             padding: 14px 16px;
-            color: #1d1d1f;
+            color: #1d1d1f !important;
+            -webkit-text-fill-color: #1d1d1f !important;
+            background: rgba(255, 250, 245, 0.95);
+        }
+
+        .settings-modal .form-group input:focus {
+            background: rgba(255, 250, 245, 1) !important;
+            color: #1d1d1f !important;
+            -webkit-text-fill-color: #1d1d1f !important;
         }
 
         .checkbox-group {
@@ -452,21 +483,29 @@
         select {
             width: 100%;
             padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 250, 245, 0.95);
             border: 2px solid rgba(255, 107, 157, 0.2);
             border-radius: 14px;
             font-size: 15px;
             transition: all 0.3s ease;
             font-family: inherit;
-            color: #1d1d1f;
+            color: #1d1d1f !important;
+            -webkit-text-fill-color: #1d1d1f !important;
             cursor: pointer;
         }
 
         select:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 250, 245, 1) !important;
             border-color: rgba(255, 107, 157, 0.6);
             box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.1);
+            color: #1d1d1f !important;
+            -webkit-text-fill-color: #1d1d1f !important;
+        }
+
+        select option {
+            color: #1d1d1f;
+            background: #fff;
         }
 
         /* 响应式 */
