@@ -462,6 +462,8 @@
             background: rgba(255, 107, 157, 0.08);
             border-radius: 12px;
             margin-top: 12px;
+            position: relative;
+            cursor: pointer;
         }
 
         .checkbox-group input[type="checkbox"] {
@@ -470,6 +472,11 @@
             cursor: pointer;
             accent-color: #ff6b9d;
             flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            -webkit-appearance: checkbox;
+            -moz-appearance: checkbox;
+            appearance: checkbox;
         }
 
         .checkbox-group label {
@@ -479,6 +486,8 @@
             font-size: 14px;
             color: #333 !important;
             -webkit-text-fill-color: #333 !important;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         /* 选择器样式 */
@@ -889,6 +898,19 @@
 
             // 默认展开标题组
             document.getElementById('titleGroup').classList.remove('hidden');
+
+            // 增强复选框点击 - 点击整个区域都能切换
+            document.querySelectorAll('.checkbox-group').forEach(group => {
+                group.addEventListener('click', (e) => {
+                    // 如果点击的不是复选框本身或label，则手动切换复选框
+                    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+                        const checkbox = group.querySelector('input[type="checkbox"]');
+                        if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                        }
+                    }
+                });
+            });
         });
 
         // 表单提交
