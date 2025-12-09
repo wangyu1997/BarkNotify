@@ -469,14 +469,16 @@
             height: 22px;
             cursor: pointer;
             accent-color: #ff6b9d;
+            flex-shrink: 0;
         }
 
         .checkbox-group label {
             margin: 0;
-            font-weight: 400;
+            font-weight: 500;
             cursor: pointer;
             font-size: 14px;
-            color: #666;
+            color: #333 !important;
+            -webkit-text-fill-color: #333 !important;
         }
 
         /* 选择器样式 */
@@ -574,9 +576,13 @@
                 background: rgba(30, 30, 40, 0.98);
             }
 
-            .modal-body,
-            .checkbox-group label {
+            .modal-body {
                 color: #ccc;
+            }
+
+            .checkbox-group label {
+                color: #ccc !important;
+                -webkit-text-fill-color: #ccc !important;
             }
         }
 
@@ -728,7 +734,7 @@
                     <label style="color: #ff6b9d; text-align: left;">💌 TA 的设备 Key</label>
                     <input type="text" id="settingsToken" placeholder="输入对方的 Bark Key">
                     <div class="checkbox-group">
-                        <input type="checkbox" id="settingsSaveToken">
+                        <input type="checkbox" id="settingsSaveToken" checked>
                         <label for="settingsSaveToken">记住 Key（保存在本地）</label>
                     </div>
                 </div>
@@ -838,7 +844,8 @@
             const icon = getCookie(ICON_COOKIE_NAME) || ICON_URL;
 
             document.getElementById('settingsToken').value = token;
-            document.getElementById('settingsSaveToken').checked = !!token;
+            // 默认选中"记住 Key"
+            document.getElementById('settingsSaveToken').checked = true;
             document.getElementById('settingsServer').value = server;
             document.getElementById('settingsIcon').value = icon;
 
