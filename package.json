@@ -1,0 +1,19 @@
+{
+  "name": "bark-notification-sender",
+  "version": "1.0.0",
+  "description": "A web application to send iOS notifications via Bark server",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "deploy:vercel": "vercel --prod",
+    "deploy:netlify": "netlify deploy --prod"
+  },
+  "keywords": [
+    "bark",
+    "notification",
+    "ios",
+    "push"
+  ],
+  "author": "",
+  "license": "MIT"
+}
