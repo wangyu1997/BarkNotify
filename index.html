@@ -12,37 +12,47 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background-attachment: fixed;
             min-height: 100vh;
             padding: 20px;
-            color: #333;
+            color: #1d1d1f;
         }
 
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+            backdrop-filter: blur(10px) saturate(150%);
+            -webkit-backdrop-filter: blur(10px) saturate(150%);
             color: white;
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header h1 {
-            font-size: 28px;
+            font-size: 32px;
+            font-weight: 700;
             margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
         .header p {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 15px;
+            opacity: 0.95;
+            font-weight: 400;
         }
 
         .content {
@@ -50,35 +60,41 @@
         }
 
         .section {
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .section:last-child {
-            border-bottom: none;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 15px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             gap: 8px;
+            letter-spacing: -0.3px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
+            font-weight: 500;
+            color: #1d1d1f;
             font-size: 14px;
+            letter-spacing: -0.2px;
         }
 
         .form-group input,
@@ -86,18 +102,24 @@
         .form-group select {
             width: 100%;
             padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
             font-size: 15px;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
             font-family: inherit;
+            color: #1d1d1f;
         }
 
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #667eea;
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .form-group textarea {
@@ -108,40 +130,46 @@
         .form-group small {
             display: block;
             margin-top: 6px;
-            color: #888;
+            color: #86868b;
             font-size: 12px;
+            letter-spacing: -0.1px;
         }
 
         .checkbox-group {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
         }
 
         .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
+            accent-color: #667eea;
         }
 
         .checkbox-group label {
             margin: 0;
-            font-weight: normal;
+            font-weight: 400;
             cursor: pointer;
             font-size: 14px;
+            color: #1d1d1f;
         }
 
         .radio-group {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 10px;
         }
 
         .radio-option {
             flex: 1;
-            min-width: 120px;
+            min-width: 110px;
         }
 
         .radio-option input[type="radio"] {
@@ -151,37 +179,50 @@
         .radio-option label {
             display: block;
             padding: 12px 16px;
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             font-weight: 500;
+            font-size: 14px;
+            color: #1d1d1f;
+        }
+
+        .radio-option label:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-1px);
         }
 
         .radio-option input[type="radio"]:checked + label {
-            background: #667eea;
+            background: rgba(102, 126, 234, 0.95);
             color: white;
-            border-color: #667eea;
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
 
         .btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 14px;
+            font-size: 17px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
+            letter-spacing: -0.3px;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
         }
 
         .btn:active {
@@ -189,38 +230,9 @@
         }
 
         .btn:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
             transform: none;
-        }
-
-        .sound-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .sound-option {
-            padding: 10px 8px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s;
-        }
-
-        .sound-option:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-        }
-
-        .sound-option.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
         }
 
         .hidden {
@@ -234,7 +246,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -243,25 +257,38 @@
 
         .modal.show {
             display: flex;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 20px;
+            padding: 32px;
             max-width: 400px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: modalSlideIn 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         @keyframes modalSlideIn {
             from {
-                transform: translateY(-50px);
+                transform: scale(0.9) translateY(-20px);
                 opacity: 0;
             }
             to {
-                transform: translateY(0);
+                transform: scale(1) translateY(0);
                 opacity: 1;
             }
         }
@@ -274,18 +301,21 @@
         }
 
         .modal-icon {
-            font-size: 40px;
+            font-size: 48px;
         }
 
         .modal-title {
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 22px;
+            font-weight: 600;
+            color: #1d1d1f;
+            letter-spacing: -0.4px;
         }
 
         .modal-body {
-            margin-bottom: 20px;
-            color: #555;
+            margin-bottom: 24px;
+            color: #1d1d1f;
             line-height: 1.6;
+            font-size: 15px;
         }
 
         .modal-footer {
@@ -295,22 +325,28 @@
 
         .modal-btn {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
+            border-radius: 12px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .modal-btn-primary {
-            background: #667eea;
+            background: rgba(102, 126, 234, 0.95);
             color: white;
         }
 
         .modal-btn-primary:hover {
-            background: #5568d3;
+            background: rgba(102, 126, 234, 1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .modal-btn-primary:active {
+            transform: translateY(0);
         }
 
         @media (max-width: 640px) {
@@ -319,15 +355,19 @@
             }
 
             .header {
-                padding: 20px 15px;
+                padding: 30px 20px;
             }
 
             .header h1 {
-                font-size: 24px;
+                font-size: 28px;
             }
 
             .content {
                 padding: 20px 15px;
+            }
+
+            .section {
+                padding: 16px;
             }
 
             .radio-group {
@@ -338,8 +378,64 @@
                 min-width: 100%;
             }
 
-            .sound-grid {
-                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            .modal-content {
+                padding: 24px;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            }
+
+            .container {
+                background: rgba(28, 28, 30, 0.8);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .section {
+                background: rgba(44, 44, 46, 0.6);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                background: rgba(58, 58, 60, 0.8);
+                border-color: rgba(255, 255, 255, 0.1);
+                color: #f5f5f7;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus,
+            .form-group select:focus {
+                background: rgba(58, 58, 60, 0.95);
+            }
+
+            .section-title,
+            .form-group label,
+            .checkbox-group label {
+                color: #f5f5f7;
+            }
+
+            .radio-option label {
+                background: rgba(58, 58, 60, 0.6);
+                color: #f5f5f7;
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .checkbox-group {
+                background: rgba(58, 58, 60, 0.4);
+            }
+
+            .modal-content {
+                background: rgba(28, 28, 30, 0.95);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .modal-title,
+            .modal-body {
+                color: #f5f5f7;
             }
         }
     </style>
@@ -748,8 +844,8 @@
                     return;
                 }
 
-                // 检查响应数据
-                if (data.code === 200) {
+                // 检查响应数据 - Bark 返回格式：{"code":200,"message":"success","timestamp":1765292381}
+                if (data.code === 200 && data.message === 'success') {
                     showModal(
                         true,
                         '发送成功',
